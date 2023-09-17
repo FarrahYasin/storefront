@@ -1,0 +1,13 @@
+.header-title{
+  color: #903da0;
+  padding: 3px 3em;
+    margin: 0;
+  }
+.hh{
+ display: flex;
+   /* background: linear-gradient(1deg, #56d8e4 3.9%, #9f01ea 90%);; */
+   background: linear-gradient(16deg, #bea3c4 .9%, violet 20%);;
+    color: #903da0;
+    padding: 3px 3em;
+    margin: 0;
+}
