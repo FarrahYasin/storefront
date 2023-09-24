@@ -1,17 +1,26 @@
-import './Header.css'
-import { Link } from "react-router-dom";
 
-function Header(){
-    return (
-      <header>
-        <header className="h1">
-          <div className='hh'>
-        <h1 className='header-title'>FARAH STORE </h1>
-       <Link  style={{ color: "purple", textDecoration: 'none' ,padding:'12px'}} to='/'>CATEGORIES</Link>
-       <Link style={{ color: "purple", textDecoration: 'none',padding:'12px' }} to='/products'>PRODUCTS</Link>
-          </div>
-        </header>
-      </header>
-    );
-};
-export default Header;
+import React from "react";
+import Toolbar from "@mui/material/Toolbar";
+import AppBar from "@mui/material/AppBar";
+
+export default function Header(props) {
+  const style = {
+    fontSize: "xx-large",
+    color: "#fff",
+    height: "60px",
+    backgroundColor: "#c676d6",
+  };
+
+  return (
+    <>
+      <AppBar style={style} position="static">
+        <Toolbar>
+          <h3>FARAH STORE</h3>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+}
+    
+
+
