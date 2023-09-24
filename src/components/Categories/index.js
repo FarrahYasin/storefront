@@ -1,51 +1,112 @@
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { selectedCategory } from "../../store/Actions";
+import AppBar from "@mui/material/AppBar";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import { changeActiveCategory } from "../../store/categories";
 
-function Categories (props) {
+function Categories(props) {
+  const [activeTab, setActiveTab] = useState(0); // Initialize with 0 for the first tab
 
-  const Item = styled(Paper)(({ theme }) => ({
-    textAlign: "center",
-    backgroundColor: theme.palette.mode === "dark" ? "#fff" : "violet",
-    padding: theme.spacing(1.5)
-    }));
-
-    console.log(props.myCategories)
+  const tabStyle = {
+    fontSize: "20px",
+    color: "#fff",
+  };
+  
+  const appBarStyle = {
+    height: "60px",
+    justifyContent: "center",
+    backgroundColor: "#903da0",
+  };
 
   return (
-    <div>
-      <h1>CATEGORIES:</h1>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={20}>
-          {props.myCategories.category.map((item, idx) => {
+    <section>
+      <AppBar position="static" style={appBarStyle}>
+        <Tabs value={activeTab}>
+          {props.categories.categories.map((category, index) => {
             return (
-              <Grid item xs={4} key={idx}>
-                <Link to="/products">
-                  <Item onClick={() => props.selectedCategory(item.name)}>
-                    <h3>{item.displayName}</h3>
-                    <div>
-                      <img width = '250px'src='https://www.byrdie.com/thmb/ow5x2uWMmrt5_nC3qtt6XTNdWMA=/400x250/filters:no_upscale():max_bytes(150000):strip_icc()/byr-best-chanel-gift-sets-tout-8dfab1e16e924bdbb3b099333a0de98a.jpg' alt="" />
-                    </div>
-                    <p>{item.description}</p>
-                  </Item>
-                </Link>
-              </Grid>
+              <Tab
+                label={category.displayName}
+                key={category.name}
+                onClick={() => {
+                  props.changeActiveCategory(category.name);
+                  setActiveTab(index); // Set the active tab index when a tab is clicked
+                }}
+                style={tabStyle}
+              />
             );
           })}
-        </Grid>
-      </Box>
-    </div>
+        </Tabs>
+      </AppBar>
+    </section>
   );
+}
+
+const mapStateToProps = (state) => {
+  return { categories: state.categories };
 };
 
-const mapStateToProps = (state) => ({
-  myCategories: state.myCategoriesReducer
-});
-
-const mapDispatchToProps = { selectedCategory };
+const mapDispatchToProps = { changeActiveCategory };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);
+
+
+
+
+
+
+
+
+
+
+
+
+//before fix the error
+
+// import React from "react";
+// import { connect } from "react-redux";
+// import AppBar from "@mui/material/AppBar";
+// import Tabs from "@mui/material/Tabs";
+// import Tab from "@mui/material/Tab";
+// import { changeActiveCategory } from "../../store/categories";
+
+// function Categories(props) {
+
+//     const tabStyle = {
+//         fontSize: "20px",
+//         color: "#fff",
+//     };
+//   const appBarStyle = {
+//     height: "60px",
+//     justifyContent: "center",
+//     backgroundColor: "#903da0",
+//   };
+
+
+//   return (
+//     <section>
+//       <AppBar position="static" style={appBarStyle}>
+//         <Tabs>
+//           {props.categories.categories.map((category) => {
+//             return (
+//               <Tab
+//                 label={category.displayName}
+//                 key={category.name}
+//                 onClick={() => props.changeActiveCategory(category.name)}
+//                 style={tabStyle}
+//               />
+//             );
+//           })}
+//         </Tabs>
+//       </AppBar>
+//     </section>
+//   );
+// }
+
+// const mapStateToProps = (state) => {
+//   return { categories: state.categories };
+// };
+
+// const mapDispatchToProps = { changeActiveCategory };
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Categories);
