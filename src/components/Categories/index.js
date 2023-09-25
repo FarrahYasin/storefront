@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useState,useEffect } from "react";
+import { connect , useDispatch} from "react-redux";
 import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { changeActiveCategory } from "../../store/categories";
+import { changeActiveCategory ,fetchCategories } from "../../store/categories";
 
 function Categories(props) {
-  const [activeTab, setActiveTab] = useState(0); // Initialize with 0 for the first tab
+  const [activeTab, setActiveTab] = useState(0); 
 
   const tabStyle = {
     fontSize: "20px",
@@ -18,19 +18,27 @@ function Categories(props) {
     justifyContent: "center",
     backgroundColor: "#903da0",
   };
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
   return (
     <section>
-      <AppBar position="static" style={appBarStyle}>
+          {/* <h5>{props.categories.activeCategory.toUpperCase()}</h5> */}
+      <AppBar position="static" style={appBarStyle} >
+
         <Tabs value={activeTab}>
           {props.categories.categories.map((category, index) => {
-            return (
-              <Tab
-                label={category.displayName}
-                key={category.name}
-                onClick={() => {
-                  props.changeActiveCategory(category.name);
-                  setActiveTab(index); // Set the active tab index when a tab is clicked
+              return (
+                  <Tab
+                  
+                  label={category.displayName}
+                  key={category.name}
+                  onClick={() => {
+                      props.changeActiveCategory(category.name)     
+
+                  setActiveTab(index); 
                 }}
                 style={tabStyle}
               />
@@ -43,7 +51,7 @@ function Categories(props) {
 }
 
 const mapStateToProps = (state) => {
-  return { categories: state.categories };
+  return { categories: state.categories};
 };
 
 const mapDispatchToProps = { changeActiveCategory };

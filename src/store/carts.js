@@ -70,7 +70,7 @@ export const removeFromCart = (product) => {
   };
 };
 
-export const addToCart = (product) => {
+export function addToCart (product) {
   return {
     type: "ADD_TO_CART",
     payload: product,
