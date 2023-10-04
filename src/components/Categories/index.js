@@ -23,9 +23,12 @@ function Categories(props) {
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
+
+
   return (
     <section>
           {/* <h5>{props.categories.activeCategory.toUpperCase()}</h5> */}
+          
       <AppBar position="static" style={appBarStyle} >
 
         <Tabs value={activeTab}>
@@ -33,7 +36,7 @@ function Categories(props) {
               return (
                   <Tab
                   
-                  label={category.displayName}
+                  label={category.name}
                   key={category.name}
                   onClick={() => {
                       props.changeActiveCategory(category.name)     
@@ -51,7 +54,8 @@ function Categories(props) {
 }
 
 const mapStateToProps = (state) => {
-  return { categories: state.categories};
+  // return { categories: state.categories};
+  return{ categories: state.categories};
 };
 
 const mapDispatchToProps = { changeActiveCategory };
