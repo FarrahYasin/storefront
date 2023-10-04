@@ -59,12 +59,7 @@ function Products(props) {
               <Card key={product.name} className="product-card">
                 <CardHeader title={product.name} subheader={product.category} />
 
-                {/* <img
-                  className="product-image"
-                  src={product.image}
-                  style={style}
-                  alt="images"
-                /> */}
+        
                 <CardHeader
                   title={"Price  " + product.price + " -JD"}
                   subheader={

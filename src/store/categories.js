@@ -6,7 +6,7 @@ const initialState = {
     // { name: "Gifts", displayName: "Gifts" },
     // { name: "Accessories", displayName: "Accessories" },
   ],
-  // activeCategory: "Electronics",
+  // activeCategory: "Food",
   activeCategory: "",
 };
 
@@ -19,9 +19,11 @@ const rootReducer = (state = initialState, action) => {
         activeCategory: payload,
       };
       case "FETCH":
+        
         const categoriesArray = payload.results;
         return {
           ...state,
+          
           categories: categoriesArray,
         };
     case "change":
